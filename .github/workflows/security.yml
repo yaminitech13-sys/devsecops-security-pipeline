@@ -6,21 +6,24 @@ on:
   pull_request:
     branches: [ "main" ]
 
+permissions:
+  contents: read
+
 jobs:
   python-scan:
     name: Python Bandit Scan
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v3
 
       - name: Set up Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v4
         with:
           python-version: '3.10'
 
       - name: Install Bandit
-       run: pip install bandit
+        run: pip install bandit
 
       - name: Run Bandit Security Scan
-      run: bandit -r . -ll
+        run: bandit -r . -ll
