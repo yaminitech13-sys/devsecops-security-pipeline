@@ -1,3 +1,3 @@
-user_input = "2 + 2"
-result = eval(user_input)
-print("Result:", result)
+first_number = 2
+second_number = 2
+print("Result:", first_number + second_number)
