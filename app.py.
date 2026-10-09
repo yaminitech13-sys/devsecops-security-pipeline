@@ -1,4 +1,3 @@
-
 # Secure version: no dynamic expression evaluation.
 
 first_number = 2
