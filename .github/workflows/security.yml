@@ -26,7 +26,10 @@ jobs:
         run: pip install bandit
 
       - name: Run Bandit
-        run: bandit -r app.py
+       run: |
+              ls -l app.py
+              cat app.py
+              bandit -f txt app.py
 
   trivy:
     name: Docker Security Scan
