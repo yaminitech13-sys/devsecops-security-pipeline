@@ -1,7 +1,8 @@
 
-# Intentionally insecure code for a controlled security lab.
-# Bandit should flag the use of eval().
+# Secure version: no dynamic expression evaluation.
 
-user_input = "2 + 2"
-result = eval(user_input)
+first_number = 2
+second_number = 2
+
+result = first_number + second_number
 print("Result:", result)
