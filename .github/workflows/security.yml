@@ -1,10 +1,7 @@
 
 name: DevSecOps Security Pipeline
 
-on:
-  push:
-  pull_request:
-  workflow_dispatch:
+on: [push, workflow_dispatch]
 
 permissions:
   contents: read
@@ -14,35 +11,38 @@ jobs:
     name: Python Security Scan
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      - name: Set up Python
-        uses: actions/setup-python@v5
+      - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
 
       - name: Install Bandit
         run: pip install bandit
 
+      - name: Show Python file
+        run: |
+          pwd
+          ls -la
+          cat app.py
+
       - name: Run Bandit
-       run: |
-              ls -l app.py
-              cat app.py
-              bandit -f txt app.py
+        run: bandit app.py
 
   trivy:
     name: Docker Security Scan
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
       - name: Scan Docker configuration
         uses: aquasecurity/trivy-action@master
         with:
           scan-type: config
-          scan-ref: .
+          scan-ref: 
+          severity: HIGH,CRITICAL
+          exit-code: "0"
+          format: table
           severity: HIGH,CRITICAL
           exit-code: "0"
           format: table
