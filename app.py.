@@ -1,0 +1,7 @@
+
+# Intentionally insecure code for a controlled security lab.
+# Bandit should flag the use of eval().
+
+user_input = "2 + 2"
+result = eval(user_input)
+print("Result:", result)
